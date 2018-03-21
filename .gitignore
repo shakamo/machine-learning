@@ -1,0 +1,5 @@
+lib/datasets/__pycache__
+lib/ml/__pycache__
+lib/pd/__pycache__
+venv/bin
+venv
