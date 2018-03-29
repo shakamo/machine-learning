@@ -3,3 +3,10 @@ lib/ml/__pycache__
 lib/pd/__pycache__
 venv/bin
 venv
+USDJPY.hst_.csv
+lib/pipelines/__pycache__
+GBPJPY.hst_.csv
+workspace.xml
+__pycache__
+USDJPY.hst_2.csv
+input

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # Coded by Daniel Fernandez
 # mechanicalForex.com, asirikuy.com 2015
+# currency_converter.py -f GBPJPY.hst -ty old
 
 import argparse
 import struct
@@ -12,6 +13,10 @@ HEADER_SIZE = 148
 OLD_FILE_STRUCTURE_SIZE = 44
 NEW_FILE_STRUCTURE_SIZE = 60
 
+from pathlib import Path
+
+ROOT = Path(__file__).parent.resolve().parent.resolve()
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -19,7 +24,7 @@ def main():
     parser.add_argument('-ty', '--filetype')
     args = parser.parse_args()
 
-    filename = args.filenamee
+    filename = args.filename
     filetype = args.filetype
 
     if filename is None:
@@ -38,7 +43,7 @@ def main():
     close_price = []
     volume = []
 
-    with open(filename, 'rb') as f:
+    with open(ROOT.joinpath('input').joinpath(filename), 'rb') as f:
         while True:
 
             if read >= HEADER_SIZE:
@@ -95,7 +100,7 @@ def main():
     result.columns = ['1_open', '2_high', '3_low', '4_close', '5_volume']
     print(result)
 
-    result.to_csv(filename + '_.csv', header=True)
+    result.to_csv(ROOT.joinpath('input').joinpath(filename + '_.csv'), header=True)
 
 
 if __name__ == "__main__":
