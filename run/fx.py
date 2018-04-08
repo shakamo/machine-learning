@@ -4,6 +4,13 @@ from lib.prepare import feature_extraction
 
 from datetime import datetime
 
+from pathlib import Path
+import sys, os
+
+ROOT = Path(__file__).parent.resolve().parent.resolve()
+sys.path.append(ROOT)
+
+
 def main():
     print(datetime.now())
 

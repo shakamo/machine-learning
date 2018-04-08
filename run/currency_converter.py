@@ -6,7 +6,7 @@
 import argparse
 import struct
 import time
-
+import os,sys
 import pandas as pd
 
 HEADER_SIZE = 148
@@ -16,6 +16,8 @@ NEW_FILE_STRUCTURE_SIZE = 60
 from pathlib import Path
 
 ROOT = Path(__file__).parent.resolve().parent.resolve()
+sys.path.append(ROOT)
+
 
 
 def main():
