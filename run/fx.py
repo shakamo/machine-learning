@@ -1,14 +1,14 @@
-from lib.datasets import toy,csv
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).parent.resolve().parent.resolve()
+sys.path.append(ROOT)
+
+from lib.datasets import toy, csv
 from lib.utils import log
 from lib.prepare import feature_extraction
 
 from datetime import datetime
-
-from pathlib import Path
-import sys, os
-
-ROOT = Path(__file__).parent.resolve().parent.resolve()
-sys.path.append(ROOT)
 
 
 def main():
@@ -16,7 +16,6 @@ def main():
 
     digits = toy.load_digits()
     data = csv.load_csv_file('USDJPY.hst_.csv')
-
 
     # data.reset_index().set_index('0_openTime', inplace=True)
     # log.info(data)
@@ -28,8 +27,6 @@ def main():
 
     csv.save_csv_file('USDJPY.new.csv', data)
 
-
-
     # n_samples = len(digits.images)
     # X = digits.images.reshape(n_samples, -1)
     # y = digits.target
@@ -37,6 +34,7 @@ def main():
     # bayesian_executor.tune(X, y)
 
     print(datetime.now())
+
 
 if __name__ == '__main__':
     main()
