@@ -1,8 +1,4 @@
-import sys
-from pathlib import Path
-
-
-print(sys.path)
+import pth,sys
 
 from lib.datasets import toy, csv
 from lib.utils import log
@@ -10,6 +6,7 @@ from lib.prepare import feature_extraction
 
 from datetime import datetime
 
+print(sys.path)
 
 def main():
     print(datetime.now())
