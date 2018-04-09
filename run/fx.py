@@ -4,6 +4,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent.resolve().parent.resolve()
 sys.path.append(ROOT)
 
+
 from lib.datasets import toy, csv
 from lib.utils import log
 from lib.prepare import feature_extraction
@@ -12,6 +13,8 @@ from datetime import datetime
 
 
 def main():
+    print(Path(__file__).parent.resolve() + 'is run?')
+    print(ROOT + 'is root')
     print(datetime.now())
 
     digits = toy.load_digits()
