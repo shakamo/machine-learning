@@ -1,8 +1,6 @@
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).parent.resolve().parent.resolve()
-sys.path.append(str(ROOT))
 
 print(sys.path)
 
@@ -14,8 +12,6 @@ from datetime import datetime
 
 
 def main():
-    print(str(Path(__file__).parent.resolve()) + ' is run?')
-    print(str(ROOT) + ' is root')
     print(datetime.now())
 
     digits = toy.load_digits()
