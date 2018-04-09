@@ -15,6 +15,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="sys" />
+          <option value="pth" />
         </list>
       </option>
     </inspection_tool>

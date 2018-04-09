@@ -1,12 +1,10 @@
-import pth,sys
+import sys,pth
 
 from lib.datasets import toy, csv
 from lib.utils import log
 from lib.prepare import feature_extraction
 
 from datetime import datetime
-
-print(sys.path)
 
 def main():
     print(datetime.now())
