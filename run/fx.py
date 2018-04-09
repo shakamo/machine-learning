@@ -2,8 +2,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent.resolve().parent.resolve()
-sys.path.append(ROOT)
+sys.path.append(str(ROOT))
 
+print(sys.path)
 
 from lib.datasets import toy, csv
 from lib.utils import log
@@ -13,8 +14,8 @@ from datetime import datetime
 
 
 def main():
-    print(Path(__file__).parent.resolve() + 'is run?')
-    print(ROOT + 'is root')
+    print(str(Path(__file__).parent.resolve()) + ' is run?')
+    print(str(ROOT) + ' is root')
     print(datetime.now())
 
     digits = toy.load_digits()
