@@ -14,13 +14,9 @@ def main():
 
     # data.reset_index().set_index('0_openTime', inplace=True)
     # log.info(data)
-    # data = data.iloc[-100:]
+    # data = data.iloc[-1000:]
 
-    feature_extraction.extract_for_fx_by_m1(data)
-
-    log.info(data)
-
-    csv.save_csv_file('USDJPY.new.csv', data)
+    # feature_extraction.extract_for_fx_by_m1(data)
 
     # n_samples = len(digits.images)
     # X = digits.images.reshape(n_samples, -1)
@@ -29,6 +25,10 @@ def main():
     # bayesian_executor.tune(X, y)
 
     print(datetime.now())
+    feature_extraction.extract_for_fx_by_m1_vectorize(data)
+    print(datetime.now())
+
+    csv.save_csv_file('USDJPY.new.csv', data)
 
 
 if __name__ == '__main__':
