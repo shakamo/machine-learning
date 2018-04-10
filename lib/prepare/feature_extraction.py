@@ -1,12 +1,8 @@
-import os
-
-import pandas as pd
 import numpy as np
-
+import pandas as pd
 
 
 def extract_for_fx_by_m1(df):
-
     df['1_1_M1_range'] = df['2_high'] - df['3_low']
     df['1_2_M1_upper_beard'] = df['2_high'] - df['1_open']
     df['1_3_M1_lower_beard'] = df['4_close'] - df['3_low']
@@ -74,55 +70,68 @@ def trend(x, df, m_size):
     return a.max() - b.min()
 
 
-
 def extract_for_fx_by_m1_vectorize(df):
-
     df['1_1_M1_range'] = df['2_high'] - df['3_low']
     df['1_2_M1_upper_beard'] = df['2_high'] - df['1_open']
     df['1_3_M1_lower_beard'] = df['4_close'] - df['3_low']
     df['1_4_M1_trend'] = df['1_open'] - df['4_close']
 
-    func_range_vectorize = np.vectorize(map_vectorize, excluded=[1, 2, 3])
+    func_range_vectorize = np.vectorize(X_vectorize, excluded=[1, 2, 3])
+    func_y_vectorize = np.vectorize(y_vectorize, excluded=[1, 2])
+
+    df['1_11_M2_range'] = pd.Series(func_y_vectorize(df.index, df['2_high'], df['3_low'], 2))
+    df['1_12_M3_range'] = pd.Series(func_y_vectorize(df.index, df['2_high'], df['3_low'], 3))
+    df['1_13_M5_range'] = pd.Series(func_y_vectorize(df.index, df['2_high'], df['3_low'], 5))
+    df['1_14_M15_range'] = pd.Series(func_y_vectorize(df.index, df['2_high'], df['3_low'], 15))
+    df['1_15_M30_range'] = pd.Series(func_y_vectorize(df.index, df['2_high'], df['3_low'], 30))
+    df['1_16_M60_range'] = pd.Series(func_y_vectorize(df.index, df['2_high'], df['3_low'], 60))
+    df['1_17_M240_range'] = pd.Series(func_y_vectorize(df.index, df['2_high'], df['3_low'], 240))
 
     df['2_1_M2_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 2))
     df['2_2_M2_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 2))
     df['2_3_M2_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 2))
     df['2_4_M2_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 2))
 
-    df['3_1_M3_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 2))
-    df['3_2_M3_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 2))
-    df['3_3_M3_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 2))
-    df['3_4_M3_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 2))
+    df['3_1_M3_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 3))
+    df['3_2_M3_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 3))
+    df['3_3_M3_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 3))
+    df['3_4_M3_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 3))
 
-    df['5_1_M5_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 2))
-    df['5_2_M5_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 2))
-    df['5_3_M5_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 2))
-    df['5_4_M5_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 2))
+    df['5_1_M5_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 5))
+    df['5_2_M5_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 5))
+    df['5_3_M5_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 5))
+    df['5_4_M5_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 5))
 
-    df['15_1_M15_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 2))
-    df['15_2_M15_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 2))
-    df['15_3_M15_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 2))
-    df['15_4_M15_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 2))
+    df['15_1_M15_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 15))
+    df['15_2_M15_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 15))
+    df['15_3_M15_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 15))
+    df['15_4_M15_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 15))
 
-    df['30_1_M30_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 2))
-    df['30_2_M30_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 2))
-    df['30_3_M30_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 2))
-    df['30_4_M30_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 2))
+    df['30_1_M30_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 30))
+    df['30_2_M30_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 30))
+    df['30_3_M30_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 30))
+    df['30_4_M30_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 30))
 
-    df['60_1_M60_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 2))
-    df['60_2_M60_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 2))
-    df['60_3_M60_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 2))
-    df['60_4_M60_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 2))
+    df['60_1_M60_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 60))
+    df['60_2_M60_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 60))
+    df['60_3_M60_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 60))
+    df['60_4_M60_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 60))
 
-    df['240_1_M240_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 2))
-    df['240_2_M240_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 2))
-    df['240_3_M240_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 2))
-    df['240_4_M240_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 2))
+    df['240_1_M240_range'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['3_low'], 240))
+    df['240_2_M240_upper_beard'] = pd.Series(func_range_vectorize(df.index, df['2_high'], df['1_open'], 240))
+    df['240_3_M240_lower_beard'] = pd.Series(func_range_vectorize(df.index, df['4_close'], df['3_low'], 240))
+    df['240_4_M240_trend'] = pd.Series(func_range_vectorize(df.index, df['1_open'], df['4_close'], 240))
 
     return df
 
 
-def map_vectorize(x, high, low, m_size):
-    a = high.ix[x - m_size:x]
-    b = low.ix[x - m_size:x]
+def X_vectorize(index, x, y, m_size):
+    a = x.ix[index - m_size + 1:index]
+    b = y.ix[index - m_size + 1:index]
     return a.max() - b.min()
+
+
+def y_vectorize(index, x, y, m_size):
+    a = x.ix[index:index + m_size - 1]
+    b = y.ix[index:index + m_size - 1]
+    return (a.mean() + b.mean())/2

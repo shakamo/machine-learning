@@ -24,7 +24,6 @@ def main():
     #
     # bayesian_executor.tune(X, y)
 
-    print(datetime.now())
     feature_extraction.extract_for_fx_by_m1_vectorize(data)
     print(datetime.now())
 
