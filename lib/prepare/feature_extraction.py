@@ -72,3 +72,43 @@ def trend(x, df, m_size):
     b = df.ix[x.name - m_size:x.name, '4_close']
     return a.max() - b.min()
 
+
+
+def extract_for_fx_by_m1_vectorize(df):
+
+    df['1_1_M1_range'] = df['2_high'] - df['3_low']
+    df['1_2_M1_upper_beard'] = df['2_high'] - df['1_open']
+    df['1_3_M1_lower_beard'] = df['4_close'] - df['3_low']
+    df['1_4_M1_trend'] = df['1_open'] - df['4_close']
+
+    f_range_vectorize = lambda x: range(x, df['2_high'], df['3_low'], 2)
+    func_range_vectorize = numpy.vectorize(f_range_vectorize)
+    func_range_vectorize.excluded.add(1)
+    func_range_vectorize.excluded.add(2)
+    df['2_1_M2_range'] = pd.Series(np.vectorize(func_range_vectorize)(df.index), index=df.index)
+
+    return df
+
+def range_vectorize(x, high, low, m_size):
+    a = high.ix[x - m_size:x] # '2_high'
+    b = low.ix[x - m_size:x] # '3_low'
+    return a.max() - b.min()
+
+
+def upper_beard(x, df, m_size):
+    a = df.ix[x.name - m_size:x.name, '2_high']
+    b = df.ix[x.name - m_size:x.name, '1_open']
+    return a.max() - b.min()
+
+
+def lower_beard(x, df, m_size):
+    a = df.ix[x.name - m_size:x.name, '4_close']
+    b = df.ix[x.name - m_size:x.name, '3_low']
+    return a.max() - b.min()
+
+
+def trend(x, df, m_size):
+    a = df.ix[x.name - m_size:x.name, '1_open']
+    b = df.ix[x.name - m_size:x.name, '4_close']
+    return a.max() - b.min()
+
