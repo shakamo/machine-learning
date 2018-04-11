@@ -18,8 +18,7 @@ def show_3d(a, b, c, y, a_name, b_name, c_name):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    np.where(0 < y)
-    p = ax.scatter(a, b, c, c=y, vmin=min(y[np.where(0 < y)]), vmax=max(y[np.where(0 < y)]))
+    p = ax.scatter(a, b, c, c=y, vmin=min(y), vmax=max(y))
 
     ax.set_xlabel(a_name)
     ax.set_ylabel(b_name)
