@@ -1,33 +1,31 @@
-import sys,pth
-
-from lib.datasets import toy, csv
-from lib.utils import log
-from lib.prepare import feature_extraction
-
 from datetime import datetime
+
+import pandas as pd
+import talib as ta
+
+from lib.datasets import csv
+from lib.prepare import feature_extraction
+from lib.prepare import talib
+from lib.utils import matplotlib
+
 
 def main():
     print(datetime.now())
+    print(ta.get_function_groups())
 
-    digits = toy.load_digits()
-    data = csv.load_csv_file('USDJPY.hst_.csv')
+    ohlc = csv.load_csv_file('USDJPY.hst_.csv')
 
-    # data.reset_index().set_index('0_openTime', inplace=True)
-    # log.info(data)
-    # data = data.iloc[-1000:]
+    feature_extraction.extract_for_fx_by_m1_vectorize(ohlc)
 
-    # feature_extraction.extract_for_fx_by_m1(data)
+    df = pd.DataFrame(index=ohlc.index)
+    df['0_openTime'] = ohlc['0_openTime']
 
-    # n_samples = len(digits.images)
-    # X = digits.images.reshape(n_samples, -1)
-    # y = digits.target
-    #
-    # bayesian_executor.tune(X, y)
+    macd = talib.get_macd(ohlc)
+    rsi = talib.get_rsi(ohlc)
 
-    feature_extraction.extract_for_fx_by_m1_vectorize(data)
-    print(datetime.now())
+    df = pd.concat([macd, rsi], axis=1)
 
-    csv.save_csv_file('USDJPY.new.csv', data)
+    matplotlib.show_line3(df.macd, df.macdsignal, df.macdhist, df['0_openTime'])
 
 
 if __name__ == '__main__':

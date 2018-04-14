@@ -1,5 +1,8 @@
+import matplotlib.dates as mdates
+import matplotlib.finance as mpf
 import numpy as np
 from matplotlib import pyplot as plt
+from matplotlib import ticker
 
 
 def show_2d(x, y, z, x_name, y_name):
@@ -27,4 +30,55 @@ def show_3d(a, b, c, y, a_name, b_name, c_name):
     fig.colorbar(p)
     plt.show()
 
-    plt.savefig('viz.png')
+
+def show_line1(x, y):
+    plt.plot(y, x)
+
+    plt.show()
+
+
+def show_line2(x1, x2, y):
+    plt.plot(y, x1, label='a')
+    plt.plot(y, x2, label='b')
+
+    plt.show()
+
+
+def show_line3(x1, x2, x3, y):
+    plt.plot(y, x1, label='a')
+    plt.plot(y, x2, label='b')
+    plt.plot(y, x3, label='c')
+
+    plt.legend()
+
+    plt.show()
+
+
+def show_candlestick(ohlc):
+    fig, ax = plt.subplots()
+
+    # ローソク足
+    mpf.candlestick2_ohlc(ax, opens=ohlc['1_open'].values, closes=ohlc['4_close'].values,
+                          lows=ohlc['3_low'].values, highs=ohlc['2_high'].values,
+                          width=0.2, colorup='r', colordown='b')
+
+    # x軸を時間にする
+    xdate = ohlc.index
+    ax.xaxis.set_major_locator(ticker.MaxNLocator(6))
+
+    f = lambda x, y: mydate(x, ohlc)
+
+    ax.xaxis.set_major_formatter(ticker.FuncFormatter(f))
+    ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
+
+    fig.autofmt_xdate()
+    fig.tight_layout()
+
+    plt.show()
+
+
+def mydate(x, ohlc):
+    try:
+        return ohlc['0_openTime'].iloc[int(x)]
+    except IndexError:
+        return ''
