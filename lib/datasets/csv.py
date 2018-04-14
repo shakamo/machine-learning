@@ -1,12 +1,11 @@
-import os
+from pathlib import Path
 
 import pandas as pd
-from pathlib import Path
 
 ROOT = Path(__file__).parent.resolve().parent.resolve().parent.resolve().joinpath('input')
 
 
-def load_csv_file(file_name, without_header=True, dtype = {}):
+def load_csv_file(file_name, without_header=True, dtype={}):
     """CSVファイルを読み込む
 
     Keyword arguments:
@@ -15,10 +14,10 @@ def load_csv_file(file_name, without_header=True, dtype = {}):
 
     """
     if without_header is True:
-        df = pd.read_csv(ROOT.joinpath(file_name), header=0, dtype = dtype)
+        df = pd.read_csv(ROOT.joinpath(file_name), header=0, dtype=dtype)
         return df.iloc[:]
     else:
-        df = pd.read_csv(ROOT.joinpath(file_name), header=None, dtype = dtype)
+        df = pd.read_csv(ROOT.joinpath(file_name), header=None, dtype=dtype)
         return df.iloc[:]
 
 

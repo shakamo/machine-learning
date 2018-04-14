@@ -1,6 +1,10 @@
 from datetime import datetime
+from pathlib import Path
 
 import talib as ta
+
+ROOT = Path(__file__).parent.resolve().parent.resolve()
+sys.path.append(ROOT)
 
 from lib.datasets import csv
 from lib.prepare import feature_extraction
