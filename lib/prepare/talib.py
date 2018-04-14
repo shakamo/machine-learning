@@ -2,13 +2,25 @@ import pandas as pd
 import talib as ta
 
 
-def extract_for_fx_by_m1(df):
-    df['1_1_M1_range'] = df['2_high'] - df['3_low']
-    df['1_2_M1_upper_beard'] = df['2_high'] - df['1_open']
-    df['1_3_M1_lower_beard'] = df['4_close'] - df['3_low']
-    df['1_4_M1_trend'] = df['1_open'] - df['4_close']
+def extract_for_fx_by_m1(ohlc):
+    ohlc = get_bb(ohlc)
+    ohlc = get_dema(ohlc)
+    ohlc = get_ema(ohlc)
+    ohlc = get_ht(ohlc)
+    ohlc = get_kama(ohlc)
+    ohlc = get_ma(ohlc)
+    ohlc = get_mama(ohlc)
+    ohlc = get_midpoint(ohlc)
+    ohlc = get_midprice(ohlc)
+    ohlc = get_sar(ohlc)
+    ohlc = get_sarext(ohlc)
+    ohlc = get_sma(ohlc)
+    ohlc = get_t3(ohlc)
+    ohlc = get_tema(ohlc)
+    ohlc = get_trima(ohlc)
+    ohlc = get_wma(ohlc)
 
-    return df
+    return ohlc
 
 
 def get_bb(ohlc):
@@ -73,7 +85,7 @@ def get_ma(ohlc):
     return df
 
 
-def get_ma(ohlc):
+def get_mama(ohlc):
     mama, fama = ta.MAMA(ohlc['4_close'], fastlimit=0, slowlimit=0)
 
     df = pd.DataFrame(index=ohlc.index)
@@ -202,10 +214,6 @@ def get_rsi(ohlc):
 
 def get_MAVP(ohlc):
     return ta.MAVP(ohlc['4_close'], fastlimit=0, slowlimit=0)
-
-
-def get_bb(ohlc):
-    return ta.BBANDS(ohlc['4_close'], timeperiod=40)
 
 
 def get_bb(ohlc):
