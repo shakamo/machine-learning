@@ -1,5 +1,5 @@
 
-# historical_data_downloader.py -f GBPJPY.hst -url http://tools.fxdd.com/tools/M1Data/USDJPY.zip
+# python 1_historical_data_downloader.py -f USDJPY.hst -url http://tools.fxdd.com/tools/M1Data/USDJPY.zip
 import os
 
 import argparse

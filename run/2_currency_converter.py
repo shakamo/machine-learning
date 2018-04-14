@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # Coded by Daniel Fernandez
 # mechanicalForex.com, asirikuy.com 2015
-# currency_converter.py -f GBPJPY.hst -ty old
+# python 2_currency_converter.py -f USDJPY.hst -ty old
 
 import argparse
 import struct
