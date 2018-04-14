@@ -1,11 +1,13 @@
 # python 1_historical_data_downloader.py -f USDJPY.hst -url http://tools.fxdd.com/tools/M1Data/USDJPY.zip
 
+import os,sys
 import argparse
 import urllib.request
 import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).parent.resolve().parent.resolve()
+print(ROOT)
 sys.path.append(ROOT)
 
 def download():
