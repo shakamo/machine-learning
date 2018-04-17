@@ -13,15 +13,25 @@ def extract_for_fx_by_m1_vectorize(df):
     func_trend_vectorize = np.vectorize(X_trend_vectorize, excluded=[1, 2, 3])
     func_y_vectorize = np.vectorize(y_vectorize, excluded=[1, 2])
 
-    print('processing... X')
+    print('processing... y1')
 
-    df['X1_11_M2_range'] = func_y_vectorize(df.index, df['2_high'], df['3_low'], 2)
-    df['X1_12_M3_range'] = func_y_vectorize(df.index, df['2_high'], df['3_low'], 3)
-    df['X1_13_M5_range'] = func_y_vectorize(df.index, df['2_high'], df['3_low'], 5)
-    df['X1_14_M15_range'] = func_y_vectorize(df.index, df['2_high'], df['3_low'], 15)
-    df['X1_15_M30_range'] = func_y_vectorize(df.index, df['2_high'], df['3_low'], 30)
-    df['X1_16_M60_range'] = func_y_vectorize(df.index, df['2_high'], df['3_low'], 60)
-    df['X1_17_M240_range'] = func_y_vectorize(df.index, df['2_high'], df['3_low'], 240)
+    y2 = func_y_vectorize(df.index, df['2_high'], df['3_low'], 2)
+    y3 = func_y_vectorize(df.index, df['2_high'], df['3_low'], 3)
+    y5 = func_y_vectorize(df.index, df['2_high'], df['3_low'], 5)
+    y15 = func_y_vectorize(df.index, df['2_high'], df['3_low'], 15)
+    y30 = func_y_vectorize(df.index, df['2_high'], df['3_low'], 30)
+    y60 = func_y_vectorize(df.index, df['2_high'], df['3_low'], 60)
+    y240 = func_y_vectorize(df.index, df['2_high'], df['3_low'], 240)
+
+    print('processing... y2')
+
+    df['Y1_11_M2_range'] = np.where(y2 < 0.015, 0, np.where(y2 < 0.03, 0.015, np.where(y2 < 0.05, 0.03, np.where(y2 < 0.10, 0.05, np.where(y2 < 0.2, 0.1, np.where(y2 < 0.3, 0.2, np.nan))))))
+    df['Y1_11_M3_range'] = np.where(y3 < 0.015, 0, np.where(y3 < 0.03, 0.015, np.where(y3 < 0.05, 0.03, np.where(y3 < 0.10, 0.05, np.where(y3 < 0.2, 0.1, np.where(y3 < 0.3, 0.2, np.nan))))))
+    df['Y1_11_M5_range'] = np.where(y5 < 0.015, 0, np.where(y5 < 0.03, 0.015, np.where(y5 < 0.05, 0.03, np.where(y5 < 0.10, 0.05, np.where(y5 < 0.2, 0.1, np.where(y5 < 0.3, 0.2, np.nan))))))
+    df['Y1_11_M15_range'] = np.where(y15 < 0.015, 0, np.where(y15 < 0.03, 0.015, np.where(y15 < 0.05, 0.03, np.where(y15 < 0.10, 0.05, np.where(y15 < 0.2, 0.1, np.where(y15 < 0.3, 0.2, np.nan))))))
+    df['Y1_11_M30_range'] = np.where(y30 < 0.015, 0, np.where(y30 < 0.03, 0.015, np.where(y30 < 0.05, 0.03, np.where(y30 < 0.10, 0.05, np.where(y30 < 0.2, 0.1, np.where(y30 < 0.3, 0.2, np.nan))))))
+    df['Y1_11_M60_range'] = np.where(y60 < 0.015, 0, np.where(y60 < 0.03, 0.015, np.where(y60 < 0.05, 0.03, np.where(y60 < 0.10, 0.05, np.where(y60 < 0.2, 0.1, np.where(y60 < 0.3, 0.2, np.nan))))))
+    df['Y1_11_M240_range'] = np.where(y240 < 0.015, 0, np.where(y240 < 0.03, 0.015, np.where(y240 < 0.05, 0.03, np.where(y240 < 0.10, 0.05, np.where(y240 < 0.2, 0.1, np.where(y240 < 0.3, 0.2, np.nan))))))
 
     print('processing... X2')
 
@@ -75,65 +85,55 @@ def extract_for_fx_by_m1_vectorize(df):
     return df
 
 
+def y_vectorize(index, x, y, m_size):
+    a = x.ix[index:index - m_size + 1]
+    b = y.ix[index:index - m_size + 1]
+
+    if len(a) != m_size:
+        return np.nan
+
+    return a.mean() - b.mean()
+
+
 def X_range_vectorize(index, x, y, m_size):
     # high low
-    if index - m_size + 1 < 0:
-        return 0
-    if index < 0:
-        return 0
+    a = x.ix[index:index - m_size + 1]
+    b = y.ix[index:index - m_size + 1]
 
-    a = x.ix[index - m_size + 1:index]
-    b = y.ix[index - m_size + 1:index]
+    if len(a) != m_size:
+        return np.nan
 
     return a.max() - b.min()
 
 
 def X_upper_beard_vectorize(index, x, y, m_size):
     # high open
-    if index - m_size + 1 < 0:
-        return 0
-    if index < 0:
-        return 0
-
-    a = x.ix[index - m_size + 1:index]
+    a = x.ix[index:index - m_size + 1]
     b = y.ix[index - m_size + 1:index - m_size + 1]
+
+    if len(a) != m_size:
+        return np.nan
 
     return a.max() - b.min()
 
 
 def X_lower_beard_vectorize(index, x, y, m_size):
     # close low
-    if index - m_size + 1 < 0:
-        return 0
-    if index < 0:
-        return 0
-
     a = x.ix[index:index]
-    b = y.ix[index - m_size + 1:index]
+    b = x.ix[index:index - m_size + 1]
+
+    if len(b) != m_size:
+        return np.nan
 
     return a.min() - b.min()
 
 
 def X_trend_vectorize(index, x, y, m_size):
     # open close
-    if index - m_size + 1 < 0:
-        return 0
-    if index < 0:
-        return 0
-
     a = x.ix[index - m_size + 1:index - m_size + 1]
     b = y.ix[index:index]
 
-    return a.min() - b.min()
+    if len(a) != 1:
+        return np.nan
 
-
-def y_vectorize(index, x, y, m_size):
-    if index - m_size + 1 < 0:
-        return 0
-    if index < 0:
-        return 0
-
-    a = x.ix[index:index + m_size - 1].dropna()
-    b = y.ix[index:index + m_size - 1].dropna()
-
-    return a.mean() - b.mean()
+    return b.min() - a.min()

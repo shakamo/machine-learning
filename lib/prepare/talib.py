@@ -26,104 +26,81 @@ def extract_for_fx_by_m1(ohlc):
 def get_bb(ohlc):
     upperband, middleband, lowerband = ta.BBANDS(ohlc['4_close'], timeperiod=40)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['upperband'] = upperband
-    df['middleband'] = middleband
-    df['lowerband'] = lowerband
-    print(df)
-    return df
+    ohlc['upperband'] = upperband
+    ohlc['middleband'] = middleband
+    ohlc['lowerband'] = lowerband
+
+    return ohlc
 
 
 def get_dema(ohlc):
     dema = ta.DEMA(ohlc['4_close'], timeperiod=30)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['dema'] = dema
-    print(df)
-    return df
+    ohlc['dema'] = dema
+    return ohlc
 
 
 def get_ema(ohlc):
     ema = ta.EMA(ohlc['4_close'], timeperiod=30)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['ema'] = ema
-    print(df)
-    return df
+    ohlc['ema'] = ema
+    return ohlc
 
 
 def get_ht(ohlc):
     ht = ta.HT_TRENDLINE(ohlc['4_close'])
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['ht'] = ht
-    print(df)
-    return df
+    ohlc['ht'] = ht
+    return ohlc
 
 
 def get_kama(ohlc):
     kama = ta.KAMA(ohlc['4_close'], timeperiod=30)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['kama'] = kama
-    print(df)
-    return df
+    ohlc['kama'] = kama
+    print(ohlc)
+    return ohlc
 
 
 def get_ma(ohlc):
     ma = ta.MA(ohlc['4_close'], timeperiod=30, matype=0)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['ma'] = ma
-    print(df)
-    return df
+    ohlc['ma'] = ma
+    print(ohlc)
+    return ohlc
 
 
 def get_mama(ohlc):
-    mama, fama = ta.MAMA(ohlc['4_close'], fastlimit=0, slowlimit=0)
+    mama, fama = ta.MAMA(ohlc['4_close'])
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['mama'] = mama
-    df['fama'] = fama
-    print(df)
-    return df
+    ohlc['mama'] = mama
+    ohlc['fama'] = fama
+    print(ohlc)
+    return ohlc
 
 
 def get_midpoint(ohlc):
     midpoint = ta.MIDPOINT(ohlc['4_close'], timeperiod=14)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['midpoint'] = midpoint
-    print(df)
-    return df
+    ohlc['midpoint'] = midpoint
+    print(ohlc)
+    return ohlc
 
 
 def get_midprice(ohlc):
     midprice = ta.MIDPRICE(ohlc['2_high'], ohlc['3_low'], timeperiod=14)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['midprice'] = midprice
-    print(df)
-    return df
+    ohlc['midprice'] = midprice
+    print(ohlc)
+    return ohlc
 
 
 def get_sar(ohlc):
     sar = ta.SAR(ohlc['2_high'], ohlc['3_low'], acceleration=0, maximum=0)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['sar'] = sar
-    print(df)
-    return df
+    ohlc['sar'] = sar
+    print(ohlc)
+    return ohlc
 
 
 def get_sarext(ohlc):
@@ -131,61 +108,49 @@ def get_sarext(ohlc):
                        accelerationlong=0, accelerationmaxlong=0, accelerationinitshort=0, accelerationshort=0,
                        accelerationmaxshort=0)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['sarext'] = sarext
-    print(df)
-    return df
+    ohlc['sarext'] = sarext
+    print(ohlc)
+    return ohlc
 
 
 def get_sma(ohlc):
     sma = ta.SMA(ohlc['4_close'], timeperiod=30)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['sma'] = sma
-    print(df)
-    return df
+    ohlc['sma'] = sma
+    print(ohlc)
+    return ohlc
 
 
 def get_t3(ohlc):
     t3 = ta.T3(ohlc['4_close'], timeperiod=5, vfactor=0)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['t3'] = t3
-    print(df)
-    return df
+    ohlc['t3'] = t3
+    print(ohlc)
+    return ohlc
 
 
 def get_tema(ohlc):
     tema = ta.TEMA(ohlc['4_close'], timeperiod=30)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['tema'] = tema
-    print(df)
-    return df
+    ohlc['tema'] = tema
+    print(ohlc)
+    return ohlc
 
 
 def get_trima(ohlc):
     trima = ta.TRIMA(ohlc['4_close'], timeperiod=30)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['trima'] = trima
-    print(df)
-    return df
+    ohlc['trima'] = trima
+    print(ohlc)
+    return ohlc
 
 
 def get_wma(ohlc):
     wma = ta.WMA(ohlc['4_close'], timeperiod=30)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['wma'] = wma
-    print(df)
-    return df
+    ohlc['wma'] = wma
+    print(ohlc)
+    return ohlc
 
 
 def get_macd(ohlc):
@@ -205,16 +170,14 @@ def get_macd(ohlc):
 def get_rsi(ohlc):
     rsi = ta.RSI(ohlc['4_close'], timeperiod=40)
 
-    df = pd.DataFrame(index=ohlc.index)
-    df['0_openTime'] = ohlc['0_openTime']
-    df['rsi'] = rsi
-    print(df)
-    return df
+    ohlc['rsi'] = rsi
+    print(ohlc)
+    return ohlc
 
 
 def get_MAVP(ohlc):
-    return ta.MAVP(ohlc['4_close'], fastlimit=0, slowlimit=0)
+    mavp = ta.MAVP(ohlc['4_close'], fastlimit=0, slowlimit=0)
 
-
-def get_bb(ohlc):
-    return ta.BBANDS(ohlc['4_close'], timeperiod=40)
+    ohlc['mavp'] = mavp
+    print(ohlc)
+    return ohlc

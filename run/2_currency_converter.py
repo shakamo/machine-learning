@@ -5,25 +5,24 @@
 
 import argparse
 import struct
+import sys
 import time
-import os,sys
+from pathlib import Path
+
 import pandas as pd
+
+ROOT = Path(__file__).parent.resolve().parent.resolve()
+sys.path.append(str(ROOT))
 
 HEADER_SIZE = 148
 OLD_FILE_STRUCTURE_SIZE = 44
 NEW_FILE_STRUCTURE_SIZE = 60
 
-from pathlib import Path
-
-ROOT = Path(__file__).parent.resolve().parent.resolve()
-sys.path.append(ROOT)
-
-
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--filename')
-    parser.add_argument('-ty', '--filetype')
+    parser.add_argument('-f', '--filename', default='USDJPY.hst')
+    parser.add_argument('-ty', '--filetype', default='old')
     args = parser.parse_args()
 
     filename = args.filename
