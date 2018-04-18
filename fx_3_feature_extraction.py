@@ -1,15 +1,13 @@
-import sys
 from datetime import datetime
-from pathlib import Path
 
 import talib as ta
 
-ROOT = Path(__file__).parent.resolve().parent.resolve()
-sys.path.append(str(ROOT))
-
+from lib import get_module_logger
 from lib.datasets import csv
 from lib.prepare import feature_extraction
 from lib.prepare import talib
+
+logger = get_module_logger(__name__)
 
 
 def main():
@@ -30,7 +28,7 @@ def main():
     ohlc = ohlc.sort_index(axis=0, ascending=False)
     print(ohlc.head())
 
-    #ohlc = ohlc.iloc[0:250]
+    # ohlc = ohlc.iloc[0:250]
 
     # 1 Year
     # ohlc = ohlc.iloc[0:372000]
@@ -47,6 +45,7 @@ def main():
     csv.save_csv_file('USDJPY.new.csv', ohlc)
 
     print(datetime.now())
+
 
 if __name__ == '__main__':
     main()

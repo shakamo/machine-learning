@@ -16,12 +16,9 @@ def download():
     parser.add_argument('-u', '--url', default='http://tools.fxdd.com/tools/M1Data/USDJPY.zip')
     args = parser.parse_args()
 
-    filename = args.filename
-    url = args.url
+    urllib.request.urlretrieve(args.url, get_input_path().joinpath("{0}".format(args.filename) + ".zip"))
 
-    urllib.request.urlretrieve(url, get_input_path().joinpath("{0}".format(filename) + ".zip"))
-
-    with zipfile.ZipFile(get_input_path().joinpath("{0}".format(filename) + ".zip"), 'r') as inputFile:
+    with zipfile.ZipFile(get_input_path().joinpath("{0}".format(args.filename) + ".zip"), 'r') as inputFile:
         inputFile.extractall(get_input_path())
 
 

@@ -1,18 +1,15 @@
-#!/usr/bin/python
-# Coded by Daniel Fernandez
-# mechanicalForex.com, asirikuy.com 2015
-# python 2_currency_converter.py -f USDJPY.hst -ty old
+# python fx_2_currency_converter.py -f USDJPY.hst -ty old
 
 import argparse
 import struct
-import sys
 import time
-from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path(__file__).parent.resolve().parent.resolve()
-sys.path.append(str(ROOT))
+from lib import get_input_path
+from lib import get_module_logger
+
+logger = get_module_logger(__name__)
 
 HEADER_SIZE = 148
 OLD_FILE_STRUCTURE_SIZE = 44
@@ -44,7 +41,7 @@ def main():
     close_price = []
     volume = []
 
-    with open(ROOT.joinpath('input').joinpath(filename), 'rb') as f:
+    with open(get_input_path().joinpath(filename), 'rb') as f:
         while True:
 
             if read >= HEADER_SIZE:
@@ -101,7 +98,7 @@ def main():
     result.columns = ['1_open', '2_high', '3_low', '4_close', '5_volume']
     print(result)
 
-    result.to_csv(ROOT.joinpath('input').joinpath(filename + '_.csv'), header=True)
+    result.to_csv(get_input_path().joinpath(filename + '_.csv'), header=True)
 
 
 if __name__ == "__main__":

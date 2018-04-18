@@ -1,5 +1,8 @@
+from lib import get_module_logger
 from lib.datasets import csv
 from lib.learning.fit import bayesian_executor
+
+logger = get_module_logger(__name__)
 
 
 def main():
