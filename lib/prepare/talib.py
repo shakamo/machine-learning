@@ -1,4 +1,3 @@
-import pandas as pd
 import talib as ta
 
 
@@ -58,7 +57,6 @@ def get_kama(ohlc):
     kama = ta.KAMA(ohlc['4_close'], timeperiod=30)
 
     ohlc['kama'] = kama
-    print(ohlc)
     return ohlc
 
 
@@ -66,7 +64,6 @@ def get_ma(ohlc):
     ma = ta.MA(ohlc['4_close'], timeperiod=30, matype=0)
 
     ohlc['ma'] = ma
-    print(ohlc)
     return ohlc
 
 
@@ -75,7 +72,6 @@ def get_mama(ohlc):
 
     ohlc['mama'] = mama
     ohlc['fama'] = fama
-    print(ohlc)
     return ohlc
 
 
@@ -83,7 +79,6 @@ def get_midpoint(ohlc):
     midpoint = ta.MIDPOINT(ohlc['4_close'], timeperiod=14)
 
     ohlc['midpoint'] = midpoint
-    print(ohlc)
     return ohlc
 
 
@@ -91,7 +86,6 @@ def get_midprice(ohlc):
     midprice = ta.MIDPRICE(ohlc['2_high'], ohlc['3_low'], timeperiod=14)
 
     ohlc['midprice'] = midprice
-    print(ohlc)
     return ohlc
 
 
@@ -99,7 +93,6 @@ def get_sar(ohlc):
     sar = ta.SAR(ohlc['2_high'], ohlc['3_low'], acceleration=0, maximum=0)
 
     ohlc['sar'] = sar
-    print(ohlc)
     return ohlc
 
 
@@ -109,7 +102,6 @@ def get_sarext(ohlc):
                        accelerationmaxshort=0)
 
     ohlc['sarext'] = sarext
-    print(ohlc)
     return ohlc
 
 
@@ -117,7 +109,6 @@ def get_sma(ohlc):
     sma = ta.SMA(ohlc['4_close'], timeperiod=30)
 
     ohlc['sma'] = sma
-    print(ohlc)
     return ohlc
 
 
@@ -125,7 +116,6 @@ def get_t3(ohlc):
     t3 = ta.T3(ohlc['4_close'], timeperiod=5, vfactor=0)
 
     ohlc['t3'] = t3
-    print(ohlc)
     return ohlc
 
 
@@ -133,7 +123,6 @@ def get_tema(ohlc):
     tema = ta.TEMA(ohlc['4_close'], timeperiod=30)
 
     ohlc['tema'] = tema
-    print(ohlc)
     return ohlc
 
 
@@ -141,7 +130,6 @@ def get_trima(ohlc):
     trima = ta.TRIMA(ohlc['4_close'], timeperiod=30)
 
     ohlc['trima'] = trima
-    print(ohlc)
     return ohlc
 
 
@@ -149,7 +137,6 @@ def get_wma(ohlc):
     wma = ta.WMA(ohlc['4_close'], timeperiod=30)
 
     ohlc['wma'] = wma
-    print(ohlc)
     return ohlc
 
 
@@ -162,8 +149,6 @@ def get_macd(ohlc):
         , macdsignal=macdsignal
         , macdhist=macdhist
     )
-
-    print(ohlc.head())
     return ohlc
 
 
@@ -171,7 +156,6 @@ def get_rsi(ohlc):
     rsi = ta.RSI(ohlc['4_close'], timeperiod=40)
 
     ohlc['rsi'] = rsi
-    print(ohlc)
     return ohlc
 
 
@@ -179,5 +163,4 @@ def get_MAVP(ohlc):
     mavp = ta.MAVP(ohlc['4_close'], fastlimit=0, slowlimit=0)
 
     ohlc['mavp'] = mavp
-    print(ohlc)
     return ohlc

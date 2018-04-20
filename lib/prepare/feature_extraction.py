@@ -1,4 +1,6 @@
 import numpy as np
+import pandas as pd
+from datetime import datetime
 
 
 def extract_for_fx_by_m1_vectorize(df):
@@ -7,6 +9,8 @@ def extract_for_fx_by_m1_vectorize(df):
     df = df.assign(X1_3_M1_lower_beard=lambda df: df.apply(lambda row: row['4_close'] - row['3_low'], axis=1))
     df = df.assign(X1_4_M1_trend=lambda df: df.apply(lambda row: row['1_open'] - row['4_close'], axis=1))
 
+    func_datetime_vectorize = np.vectorize(datetime_vectorize, excluded=[1, 2])
+
     func_range_vectorize = np.vectorize(X_range_vectorize, excluded=[1, 2, 3])
     func_upper_beard_vectorize = np.vectorize(X_upper_beard_vectorize, excluded=[1, 2, 3])
     func_lower_beard_vectorize = np.vectorize(X_lower_beard_vectorize, excluded=[1, 2, 3])
@@ -14,6 +18,8 @@ def extract_for_fx_by_m1_vectorize(df):
     func_y_vectorize = np.vectorize(y_vectorize, excluded=[1, 2])
 
     print('processing... y1')
+
+    df['hour'] = func_datetime_vectorize(df.index, df['0_openTime'])
 
     y2 = func_y_vectorize(df.index, df['2_high'], df['3_low'], 2)
     y3 = func_y_vectorize(df.index, df['2_high'], df['3_low'], 3)
@@ -83,6 +89,11 @@ def extract_for_fx_by_m1_vectorize(df):
     df['X240_4_M240_trend'] = func_trend_vectorize(df.index, df['1_open'], df['4_close'], 240)
 
     return df
+
+
+def datetime_vectorize(index, x):
+    a = x.ix[index:index]
+    return a.values.astype('datetime64[h]').astype(datetime)[0].strftime('%H')
 
 
 def y_vectorize(index, x, y, m_size):
