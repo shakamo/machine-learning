@@ -21,7 +21,6 @@ def extract_for_fx_by_m1(ohlc):
     ohlc = get_wma(ohlc)
     ohlc = get_macd(ohlc)
     ohlc = get_rsi(ohlc)
-    ohlc = get_MAVP(ohlc)
 
     return ohlc
 
@@ -172,9 +171,3 @@ def get_rsi(ohlc):
     ohlc['rsi'] = rsi
     return ohlc
 
-
-def get_MAVP(ohlc):
-    mavp = ta.MAVP(ohlc['4_close'], fastlimit=0, slowlimit=0)
-
-    ohlc['mavp'] = mavp
-    return ohlc

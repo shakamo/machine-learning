@@ -25,3 +25,7 @@ def get_module_logger(module_name):
 
 def get_input_path():
     return ROOT.joinpath('input')
+
+
+def get_output_path():
+    return ROOT.joinpath('output')

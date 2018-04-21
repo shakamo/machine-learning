@@ -46,7 +46,7 @@ def get_ohlc_data(time_span):
 
     ohlc = ohlc.sort_index(axis=0, ascending=False)
     if time_span == '0':
-        ohlc = ohlc.iloc[0:250]
+        ohlc = ohlc.iloc[0:400]
     else:
         a = float(time_span) * 372000
         ohlc = ohlc.iloc[0:int(a)]

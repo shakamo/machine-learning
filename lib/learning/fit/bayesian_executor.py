@@ -32,7 +32,5 @@ def _optimize(params, name, X, y):
     model = xgboosting_pipelines.Bayesian_XG_BOOSTING(np.ravel(params), name)
     kfold = KFold(n_splits=2, random_state=42)
 
-    plot_importance(model)
-    pyplot.show()
 
     return -cross_val_score(model, X, y, cv=kfold, scoring='r2').mean()

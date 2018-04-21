@@ -1,8 +1,12 @@
+from pathlib import Path
+
 import matplotlib.dates as mdates
 import matplotlib.finance as mpf
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import ticker
+
+ROOT = Path(__file__).parent.resolve().parent.resolve().parent.resolve().joinpath('input')
 
 
 def show_2d(x, y, z, x_name, y_name):
