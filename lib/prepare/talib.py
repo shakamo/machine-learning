@@ -2,32 +2,46 @@ import talib as ta
 
 
 def extract_for_fx_by_m1(ohlc):
-    ohlc = get_bb(ohlc)
-    ohlc = get_dema(ohlc)
+    ohlc = get_bb2(ohlc)
+    ohlc = get_bb3(ohlc)
+    # ohlc = get_dema(ohlc)
     ohlc = get_ema(ohlc)
-    ohlc = get_ht(ohlc)
-    ohlc = get_kama(ohlc)
+    # ohlc = get_ht(ohlc)
+    # ohlc = get_kama(ohlc)
     ohlc = get_ma(ohlc)
-    ohlc = get_mama(ohlc)
-    ohlc = get_midpoint(ohlc)
-    ohlc = get_midprice(ohlc)
+    # ohlc = get_mama(ohlc)
+    # ohlc = get_midpoint(ohlc)
+    # ohlc = get_midprice(ohlc)
     ohlc = get_sar(ohlc)
-    ohlc = get_sarext(ohlc)
+    # ohlc = get_sarext(ohlc)
     ohlc = get_sma(ohlc)
-    ohlc = get_t3(ohlc)
-    ohlc = get_tema(ohlc)
-    ohlc = get_trima(ohlc)
+    # ohlc = get_t3(ohlc)
+    # ohlc = get_tema(ohlc)
+    # ohlc = get_trima(ohlc)
     ohlc = get_wma(ohlc)
+    ohlc = get_macd(ohlc)
+    ohlc = get_rsi(ohlc)
+    ohlc = get_MAVP(ohlc)
 
     return ohlc
 
 
-def get_bb(ohlc):
-    upperband, middleband, lowerband = ta.BBANDS(ohlc['4_close'], timeperiod=40)
+def get_bb2(ohlc):
+    upperband, middleband, lowerband = ta.BBANDS(ohlc['4_close'], timeperiod=40, nbdevup=2, nbdevdn=2)
 
-    ohlc['upperband'] = upperband
-    ohlc['middleband'] = middleband
-    ohlc['lowerband'] = lowerband
+    ohlc['upperband2'] = upperband
+    ohlc['middleband2'] = middleband
+    ohlc['lowerband2'] = lowerband
+
+    return ohlc
+
+
+def get_bb3(ohlc):
+    upperband, middleband, lowerband = ta.BBANDS(ohlc['4_close'], timeperiod=40, nbdevup=3, nbdevdn=3)
+
+    ohlc['upperband3'] = upperband
+    ohlc['middleband3'] = middleband
+    ohlc['lowerband3'] = lowerband
 
     return ohlc
 
