@@ -2,7 +2,7 @@ import plotly.offline as py
 from joblib import Parallel, delayed
 from plotly.graph_objs import *
 from datetime import datetime
-
+import os
 from lib.learning.cv.cross_validation import *
 from lib.learning.pipelines import xgboosting_pipelines
 import xgboost as xgb
@@ -35,5 +35,6 @@ def importance(X, y, chart=False, test_size=0.2, random_state=42):
     if chart is True:
         xgb.plot_importance(futures[0].steps[1][1], color=['r', 'r', 'b', 'b'], title=None, xlabel=None, ylabel=None)
         #plot_importance(futures[0].steps[1][1])
+        os.mkdir(ROOT)
         pyplot.savefig(str(ROOT) + '/' + str(datetime.now()) + ".png")
         pyplot.show()
