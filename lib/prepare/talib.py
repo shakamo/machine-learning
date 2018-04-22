@@ -170,4 +170,3 @@ def get_rsi(ohlc):
 
     ohlc['rsi'] = rsi
     return ohlc
-

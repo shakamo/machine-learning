@@ -26,15 +26,3 @@ def learn(X, y, chart=False, test_size=0.2, random_state=42):
     if chart is True:
         py.offline.plot(
             list(map(lambda a: Scatter(x=a[1], mode='markers', name=a[0]), futures)))
-
-
-def importance(X, y, chart=False, test_size=0.2, random_state=42):
-    futures = Parallel(n_jobs=-1)([
-        delayed(fit_and_importance)('XG_BOOSTING1', xgboosting_pipelines.XG_BOOSTING1(), X, y, test_size)
-    ])
-    if chart is True:
-        xgb.plot_importance(futures[0].steps[1][1], color=['r', 'r', 'b', 'b'], title=None, xlabel=None, ylabel=None)
-        #plot_importance(futures[0].steps[1][1])
-        os.mkdir(ROOT)
-        pyplot.savefig(str(ROOT) + '/' + str(datetime.now()) + ".png")
-        pyplot.show()

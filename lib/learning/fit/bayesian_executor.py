@@ -1,13 +1,10 @@
 import GPyOpt
 import numpy as np
-from matplotlib import pyplot
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
-from xgboost import plot_importance
 
 from lib.learning.kernel import kernels
 from lib.learning.pipelines import xgboosting_pipelines
-from lib.utils import matplotlib
 
 
 def tune(X, y, chart=False, test_size=0.2, random_state=42):
@@ -31,6 +28,5 @@ def tune(X, y, chart=False, test_size=0.2, random_state=42):
 def _optimize(params, name, X, y):
     model = xgboosting_pipelines.Bayesian_XG_BOOSTING(np.ravel(params), name)
     kfold = KFold(n_splits=2, random_state=42)
-
 
     return -cross_val_score(model, X, y, cv=kfold, scoring='r2').mean()

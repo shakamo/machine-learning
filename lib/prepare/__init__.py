@@ -1,2 +1,2 @@
-from . import feature_extraction
+from . import features
 from . import talib

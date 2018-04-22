@@ -1,6 +1,6 @@
 from lib import get_module_logger
 from lib.datasets import csv
-from lib.learning.fit import xgboosting_executor
+from lib.prepare import features
 
 logger = get_module_logger(__name__)
 
@@ -26,7 +26,7 @@ def main():
         list_item = X.columns.values[i]
         print('{0}:{1}'.format(i, list_item))
 
-    xgboosting_executor.importance(X, y, chart=True)
+    features.extract(X, y, chart=True)
 
 
 if __name__ == '__main__':
