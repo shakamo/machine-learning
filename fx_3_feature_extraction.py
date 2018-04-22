@@ -24,11 +24,8 @@ def main():
 
     df = features.extract(df)
 
-    df = df.sort_index(axis=0, ascending=True)
+    df = talib.extract(df)
 
-    df = talib.extract_for_fx_by_m1(df)
-
-    df = df.dropna(how='any')
     csv.save_csv_file('USDJPY.new.csv', df)
 
     print(datetime.now())

@@ -1,7 +1,9 @@
 import talib as ta
 
 
-def extract_for_fx_by_m1(ohlc):
+def extract(ohlc):
+    ohlc = ohlc.sort_index(axis=0, ascending=True)
+
     ohlc = get_bb2(ohlc)
     ohlc = get_bb3(ohlc)
     # ohlc = get_dema(ohlc)
@@ -22,6 +24,7 @@ def extract_for_fx_by_m1(ohlc):
     ohlc = get_macd(ohlc)
     ohlc = get_rsi(ohlc)
 
+    ohlc = ohlc.dropna(how='any')
     return ohlc
 
 
