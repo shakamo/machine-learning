@@ -18,4 +18,5 @@ def get_data(time_span):
         a = float(time_span) * 372000
         ohlc = ohlc.iloc[0:int(a)]
 
+    ohlc = ohlc.sort_index(axis=0, ascending=True)
     return ohlc

@@ -13,20 +13,15 @@ def main():
     df = df.dropna(how='any')
 
     y = df['Y1_11_M15_range']
-    print('y')
-    print(y.head())
 
     X = df.drop('Y1_11_M15_range', axis=1)
-    print()
-    print('X')
-    print(X.head())
     print(X.columns.values)
 
     for i in range(len(X.columns.values)):
         list_item = X.columns.values[i]
         print('{0}:{1}'.format(i, list_item))
 
-    features.extract(X, y, chart=True)
+    features.importance(X, y, chart=True)
 
 
 if __name__ == '__main__':

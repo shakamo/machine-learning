@@ -39,13 +39,13 @@ def extract(df):
 
     print('processing... y2')
 
-    df['Y1_11_M2_range'] = np.where(y2 < 0.015, 0, np.where(y2 < 0.03, 0.015, np.where(y2 < 0.05, 0.03,
-                                                                                       np.where(y2 < 0.10, 0.05,
-                                                                                                np.where(y2 < 0.2, 0.1,
-                                                                                                         np.where(
-                                                                                                             y2 < 0.3,
-                                                                                                             0.2,
-                                                                                                             np.nan))))))
+    df['Y1_11_M2_range'] = \
+        np.where(y2 < 0.015, 0,
+                 np.where(y2 < 0.03, 0.015,
+                          np.where(y2 < 0.05, 0.03,
+                                   np.where(y2 < 0.10, 0.05,
+                                            np.where(y2 < 0.2, 0.1,
+                                                     np.where(y2 < 0.3, 0.2, np.nan))))))
     df['Y1_11_M3_range'] = np.where(y3 < 0.015, 0, np.where(y3 < 0.03, 0.015, np.where(y3 < 0.05, 0.03,
                                                                                        np.where(y3 < 0.10, 0.05,
                                                                                                 np.where(y3 < 0.2, 0.1,
@@ -207,10 +207,11 @@ def X_trend_vectorize(index, x, y, m_size):
 def importance(X, y, chart=False):
     pipeline = xgboosting_pipelines.XG_BOOSTING1()
 
+    print(X.head())
+    print(y.head())
     pipeline.fit(X, y)
 
     if chart is True:
         xgb.plot_importance(pipeline.steps[1][1], color=['r', 'r', 'b', 'b'], title=None, xlabel=None, ylabel=None)
-        os.mkdir(ROOT)
         pyplot.savefig(str(ROOT) + '/' + str(datetime.now()) + ".png")
         pyplot.show()
