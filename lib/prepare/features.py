@@ -39,13 +39,13 @@ def extract(df):
 
     print('processing... y2')
 
-    df['Y1_11_M2_range'] = \
-        np.where(y2 < 0.015, 0,
-                 np.where(y2 < 0.03, 0.015,
-                          np.where(y2 < 0.05, 0.03,
-                                   np.where(y2 < 0.10, 0.05,
-                                            np.where(y2 < 0.2, 0.1,
-                                                     np.where(y2 < 0.3, 0.2, np.nan))))))
+    df['Y1_11_M2_range'] = np.where(y2 < 0.015, 0,
+                                    np.where(y2 < 0.03, 0.015,
+                                             np.where(y2 < 0.05, 0.03,
+                                                      np.where(y2 < 0.10, 0.05,
+                                                               np.where(y2 < 0.2, 0.1,
+                                                                        np.where(y2 < 0.3, 0.2, np.nan))))))
+
     df['Y1_11_M3_range'] = np.where(y3 < 0.015, 0, np.where(y3 < 0.03, 0.015, np.where(y3 < 0.05, 0.03,
                                                                                        np.where(y3 < 0.10, 0.05,
                                                                                                 np.where(y3 < 0.2, 0.1,
@@ -151,8 +151,8 @@ def datetime_vectorize(index, x):
 
 
 def y_vectorize(index, x, y, m_size):
-    a = x.ix[index:index - m_size + 1]
-    b = y.ix[index:index - m_size + 1]
+    a = x.ix[index - m_size + 1:index]
+    b = y.ix[index - m_size + 1:index]
 
     if len(a) != m_size:
         return np.nan
@@ -162,8 +162,8 @@ def y_vectorize(index, x, y, m_size):
 
 def X_range_vectorize(index, x, y, m_size):
     # high low
-    a = x.ix[index:index - m_size + 1]
-    b = y.ix[index:index - m_size + 1]
+    a = x.ix[index - m_size + 1:index]
+    b = y.ix[index - m_size + 1:index]
 
     if len(a) != m_size:
         return np.nan
@@ -173,7 +173,7 @@ def X_range_vectorize(index, x, y, m_size):
 
 def X_upper_beard_vectorize(index, x, y, m_size):
     # high open
-    a = x.ix[index:index - m_size + 1]
+    a = x.ix[index - m_size + 1:index]
     b = y.ix[index - m_size + 1:index - m_size + 1]
 
     if len(a) != m_size:
@@ -185,7 +185,7 @@ def X_upper_beard_vectorize(index, x, y, m_size):
 def X_lower_beard_vectorize(index, x, y, m_size):
     # close low
     a = x.ix[index:index]
-    b = x.ix[index:index - m_size + 1]
+    b = x.ix[index - m_size + 1:index]
 
     if len(b) != m_size:
         return np.nan

@@ -10,11 +10,11 @@ def XG_BOOSTING1():
 
 
 def XG_BOOSTING2():
-    max_depth = 7
+    max_depth = 9
     min_child_weight = 10
     subsample = 1.0
     colsample_bytree = 0.5
-    num_estimators = 500
+    num_estimators = 3000
     learning_rate = 0.009
 
     model = xgb.XGBRegressor(max_depth=max_depth,

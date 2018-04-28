@@ -21,14 +21,12 @@ def main():
     args = parser.parse_args()
 
     df = ohlc.get_data(args.time)
-    print(len(df))
 
     df = features.extract(df)
 
     df = talib.extract(df)
 
-    print(len(df))
-    csv.save_csv_file('USDJPY.new.csv', df)
+    csv.save_csv_file('USDJPY.M1.csv', df)
 
     print(datetime.now())
 

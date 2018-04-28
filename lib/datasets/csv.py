@@ -14,7 +14,8 @@ def load_csv_file(file_name, without_header=True, dtype={}, parse_dates={}):
 
     """
     if without_header is True:
-        df = pd.read_csv(ROOT.joinpath(file_name), header=0, dtype=dtype, parse_dates=parse_dates)
+        parser = lambda date: pd.to_datetime(date, format='%Y-%m-%d %H:%M:%S')
+        df = pd.read_csv(ROOT.joinpath(file_name), header=0, parse_dates=['0_openTime'], date_parser=parser)
         return df.iloc[:]
     else:
         df = pd.read_csv(ROOT.joinpath(file_name), header=None, dtype=dtype, parse_dates=parse_dates)
