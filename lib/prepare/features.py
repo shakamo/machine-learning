@@ -205,7 +205,7 @@ def X_trend_vectorize(index, x, y, m_size):
 
 
 def importance(X, y, chart=False):
-    pipeline = xgboosting_pipelines.XG_BOOSTING1()
+    pipeline = xgboosting_pipelines.XG_BOOSTING4()
 
     print(X.head())
     print(y.head())

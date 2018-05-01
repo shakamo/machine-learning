@@ -50,6 +50,19 @@ def XG_BOOSTING3():
     return Pipeline([('scl', StandardScaler()), ('est', model)])
 
 
+def XG_BOOSTING4():
+    max_depth = 10
+    num_estimators = 3000
+    learning_rate = 0.01
+
+    model = xgb.XGBRegressor(max_depth=max_depth,
+                             n_estimators=num_estimators,
+                             learning_rate=learning_rate
+                             )
+
+    return Pipeline([('scl', StandardScaler()), ('est', model)])
+
+
 def TUNE_XG_BOOSTING():
     model = GridSearchCV(xgb.XGBRegressor(),
                          {
