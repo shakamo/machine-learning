@@ -2,8 +2,8 @@ import plotly.offline as py
 from joblib import Parallel, delayed
 from plotly.graph_objs import *
 
-from lib.learning.cv.cross_validation import *
-from lib.learning.pipelines import standard_pipelines
+from fxlib.learning.cv.cross_validation import *
+from fxlib.learning.pipelines import standard_pipelines
 
 
 def learn(X, y, chart=False, test_size=0.1, random_state=42):

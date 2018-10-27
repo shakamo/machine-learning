@@ -3,8 +3,8 @@ from joblib import Parallel, delayed
 from plotly.graph_objs import *
 from datetime import datetime
 import os
-from lib.learning.cv.cross_validation import *
-from lib.learning.pipelines import xgboosting_pipelines
+from fxlib.learning.cv.cross_validation import *
+from fxlib.learning.pipelines import xgboosting_pipelines
 import xgboost as xgb
 from pathlib import Path
 

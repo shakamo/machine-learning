@@ -12,3 +12,13 @@ lib/utils/__pycache__
 venv/bin
 venv
 output
+.vscode
+fxlib/datasets/__pycache__
+fxlib/learning/cv/__pycache__
+fxlib/learning/fit/__pycache__
+fxlib/learning/kernel/__pycache__
+fxlib/learning/pipelines/__pycache__
+fxlib/learning/__pycache__
+fxlib/__pycache__
+fxlib/prepare/__pycache__
+fxlib/utils/__pycache__

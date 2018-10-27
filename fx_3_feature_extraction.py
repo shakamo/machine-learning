@@ -1,20 +1,23 @@
+# 2 month(60000)
+#  python fx_3_feature_extraction.py
+# 1 Year
+#  python fx_3_feature_extraction.py -t 1
+# 2 Year
+#  python fx_3_feature_extraction.py -t 2
+
 import argparse
 from datetime import datetime
 
-import talib as ta
+import fxlib
+import fxlib.datasets as datasets
+from fxlib.prepare import features, talib
+from fxlib.utils import ohlc
 
-from lib import get_module_logger
-from lib.datasets import csv
-from lib.prepare import features
-from lib.prepare import talib
-from lib.utils import ohlc
-
-logger = get_module_logger(__name__)
+logger = fxlib.get_module_logger(__name__)
 
 
 def main():
     print(datetime.now())
-    print(ta.get_function_groups())
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--time', default='0')
@@ -26,7 +29,7 @@ def main():
 
     df = talib.extract(df)
 
-    csv.save_csv_file('USDJPY.M1.csv', df)
+    datasets.csv.save_csv_file('USDJPY.M1.csv', df)
 
     print(datetime.now())
 

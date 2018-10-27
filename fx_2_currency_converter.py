@@ -1,4 +1,5 @@
-# python fx_2_currency_converter.py -f USDJPY.hst -ty old
+# python fx_2_currency_converter.py -f USDJPY -ty old
+# python fx_2_currency_converter.py
 
 import argparse
 import struct
@@ -6,8 +7,8 @@ import time
 
 import pandas as pd
 
-from lib import get_input_path
-from lib import get_module_logger
+from fxlib import get_input_path
+from fxlib import get_module_logger
 
 logger = get_module_logger(__name__)
 
@@ -18,7 +19,7 @@ NEW_FILE_STRUCTURE_SIZE = 60
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--filename', default='USDJPY.hst')
+    parser.add_argument('-f', '--filename', default='USDJPY')
     parser.add_argument('-ty', '--filetype', default='old')
     args = parser.parse_args()
 
@@ -41,7 +42,7 @@ def main():
     close_price = []
     volume = []
 
-    with open(get_input_path().joinpath(filename), 'rb') as f:
+    with open(get_input_path().joinpath(filename + '.hst'), 'rb') as f:
         while True:
 
             if read >= HEADER_SIZE:
@@ -98,7 +99,7 @@ def main():
     result.columns = ['1_open', '2_high', '3_low', '4_close', '5_volume']
     print(result)
 
-    result.to_csv(get_input_path().joinpath(filename + '_.csv'), header=True)
+    result.to_csv(get_input_path().joinpath(filename + '.csv'), header=True)
 
 
 if __name__ == "__main__":

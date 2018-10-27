@@ -5,9 +5,13 @@ from .volatility_indicators import *
 from .cycle_indicators import *
 from .pattern_recognition import *
 from .statistic_functions import *
+import datetime
 
 
 def extract(ohlc):
+    print(datetime.datetime.now())
+    print(ta.get_function_groups())
+
     # Overlap Studies Functions
     ohlc = get_bb2(ohlc)
     ohlc = get_bb3(ohlc)
@@ -151,9 +155,6 @@ def extract(ohlc):
     ohlc = get_tsf(ohlc)
     ohlc = get_var(ohlc)
 
-
-    print(ohlc.describe())
-    print(ohlc.info())
-
     ohlc = ohlc.dropna(how='any')
+    print(datetime.datetime.now())
     return ohlc

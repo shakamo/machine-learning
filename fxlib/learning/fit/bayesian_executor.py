@@ -3,8 +3,8 @@ import numpy as np
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 
-from lib.learning.kernel import kernels
-from lib.learning.pipelines import xgboosting_pipelines
+from fxlib.learning.kernel import kernels
+from fxlib.learning.pipelines import xgboosting_pipelines
 
 
 def tune(X, y, chart=False, test_size=0.2, random_state=42):

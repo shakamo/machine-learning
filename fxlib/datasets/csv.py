@@ -1,8 +1,8 @@
-from pathlib import Path
+import pathlib
 
 import pandas as pd
 
-ROOT = Path(__file__).parent.resolve().parent.resolve().parent.resolve().joinpath('input')
+ROOT = pathlib.Path(__file__).parent.parent.parent.joinpath('input')
 
 
 def load_csv_file(file_name, without_header=True, dtype={}, parse_dates={}):
@@ -14,11 +14,14 @@ def load_csv_file(file_name, without_header=True, dtype={}, parse_dates={}):
 
     """
     if without_header is True:
-        parser = lambda date: pd.to_datetime(date, format='%Y-%m-%d %H:%M:%S')
-        df = pd.read_csv(ROOT.joinpath(file_name), header=0, parse_dates=['0_openTime'], date_parser=parser)
+        def parser(date): return pd.to_datetime(
+            date, format='%Y-%m-%d %H:%M:%S')
+        df = pd.read_csv(ROOT.joinpath(file_name), header=0,
+                         parse_dates=['0_openTime'], date_parser=parser)
         return df.iloc[:]
     else:
-        df = pd.read_csv(ROOT.joinpath(file_name), header=None, dtype=dtype, parse_dates=parse_dates)
+        df = pd.read_csv(ROOT.joinpath(file_name), header=None,
+                         dtype=dtype, parse_dates=parse_dates)
         return df.iloc[:]
 
 

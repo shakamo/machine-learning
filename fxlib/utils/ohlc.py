@@ -1,4 +1,4 @@
-from lib.datasets import csv
+import fxlib.datasets
 
 
 def get_data(time_span):
@@ -7,7 +7,7 @@ def get_data(time_span):
         '5_volume': 'int16'
     }
 
-    ohlc = csv.load_csv_file('USDJPY.hst_.csv', dtype=dtype, parse_dates=['0_openTime'])
+    ohlc = fxlib.datasets.csv.load_csv_file('USDJPY.csv', dtype=dtype, parse_dates=['0_openTime'])
     print(ohlc.dtypes)
     # print(ohlc.describe())
 

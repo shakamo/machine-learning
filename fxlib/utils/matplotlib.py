@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import matplotlib.dates as mdates
-import matplotlib.finance as mpf
+import mpl_finance as mpf
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import ticker

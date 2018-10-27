@@ -1,6 +1,6 @@
 from joblib import Parallel, delayed
 
-from lib.learning.pipelines import xgboosting_pipelines
+from fxlib.learning.pipelines import xgboosting_pipelines
 
 
 def tune(X, y):

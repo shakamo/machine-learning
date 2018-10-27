@@ -9,14 +9,12 @@ def get_beta(ohlc):
     return ohlc
 
 
-
 def get_correl(ohlc):
     correl = ta.CORREL(ohlc['2_high'], ohlc['3_low'], timeperiod=30)
 
     ohlc['correl'] = correl
 
     return ohlc
-
 
 
 def get_linearreg(ohlc):
@@ -35,15 +33,13 @@ def get_linearreg_angle(ohlc):
     return ohlc
 
 
-
 def get_linearreg_intercept(ohlc):
-    linearreg_intercept = ta.LINEARREG_INTERCEPT(ohlc['4_close'], timeperiod=14)
+    linearreg_intercept = ta.LINEARREG_INTERCEPT(
+        ohlc['4_close'], timeperiod=14)
 
     ohlc['linearreg_intercept'] = linearreg_intercept
 
     return ohlc
-
-
 
 
 def get_linearreg_slope(ohlc):
@@ -60,7 +56,6 @@ def get_stddev(ohlc):
     ohlc['stddev'] = stddev
 
     return ohlc
-
 
 
 def get_tsf(ohlc):
