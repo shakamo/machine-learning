@@ -9,7 +9,7 @@ from matplotlib import pyplot
 
 from fxlib.learning.pipelines import xgboosting_pipelines
 
-ROOT = pathlib.Path(__file__).parent.parent.parent.parent.joinpath('output')
+ROOT = pathlib.Path(__file__).parent.parent.parent.joinpath('output')
 
 
 def extract(df):
@@ -186,7 +186,13 @@ def importance(X, y, chart=False):
     pipeline.fit(X, y)
 
     if chart is True:
+        fig = pyplot.figure()
+        fig.set_size_inches(35, 25)
+        ax = fig.add_subplot(111)
+
         xgb.plot_importance(pipeline.steps[1][1], color=[
-                            'r', 'r', 'b', 'b'], title=None, xlabel=None, ylabel=None)
-        pyplot.savefig(str(ROOT) + '/' + str(datetime.now()) + ".png")
+            'r', 'r', 'b', 'b'], title=None, xlabel=None, ylabel=None, ax=ax)
+
+        fig.savefig(str(ROOT) + '/' +
+                    str(datetime.datetime.now()) + ".png", dpi=130)
         pyplot.show()

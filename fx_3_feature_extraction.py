@@ -29,7 +29,7 @@ def main():
 
     df = talib.extract(df)
 
-    datasets.csv.save_csv_file('USDJPY.M1.csv', df)
+    datasets.csv.save_csv_file('USDJPY.extracted.csv', df)
 
     print(datetime.now())
 

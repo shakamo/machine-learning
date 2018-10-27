@@ -1,13 +1,13 @@
-from lib import get_module_logger
-from lib.datasets import csv
-from lib.prepare import features
-from lib.utils import *
+from fxlib import get_module_logger
+from fxlib.datasets import csv
+from fxlib.prepare import features
+from fxlib.utils import *
 
 logger = get_module_logger(__name__)
 
 
 def main():
-    df = csv.load_csv_file('USDJPY.M1.csv', True, parse_dates=['0_openTime'])
+    df = csv.load_csv_file('USDJPY.extracted.csv', True, parse_dates=['0_openTime'])
     df = df.set_index('0_openTime')
     df = df.resample('15T').interpolate()
 
@@ -15,9 +15,9 @@ def main():
     df = df.dropna(how='any')
 
     y = df['Y1_11_M15_range']
-
     X = df.drop('Y1_11_M15_range', axis=1)
-    X = X.drop('X15_1_M15_range', axis=1)
+
+    # X = X.drop('X15_1_M15_range', axis=1)
 
     for i in range(len(X.columns.values)):
         list_item = X.columns.values[i]
