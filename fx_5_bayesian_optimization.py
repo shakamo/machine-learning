@@ -1,12 +1,12 @@
-from lib import get_module_logger
-from lib.datasets import csv
-from lib.learning.fit import bayesian_executor
+from fxlib import get_module_logger
+from fxlib.datasets import csv
+from fxlib.learning.fit import bayesian_executor
 
 logger = get_module_logger(__name__)
 
 
 def main():
-    df = csv.load_csv_file('USDJPY.new.csv', True)
+    df = csv.load_csv_file('USDJPY.extracted.csv', True)
     df = df.dropna(how='any')
     print(df.head())
 

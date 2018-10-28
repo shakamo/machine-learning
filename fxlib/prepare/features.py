@@ -187,12 +187,12 @@ def importance(X, y, chart=False):
 
     if chart is True:
         fig = pyplot.figure()
-        fig.set_size_inches(35, 25)
+        fig.set_size_inches(40, 25)
         ax = fig.add_subplot(111)
 
         xgb.plot_importance(pipeline.steps[1][1], color=[
             'r', 'r', 'b', 'b'], title=None, xlabel=None, ylabel=None, ax=ax)
 
         fig.savefig(str(ROOT) + '/' +
-                    str(datetime.datetime.now()) + ".png", dpi=130)
+                    str(datetime.datetime.now()) + ".png", dpi=150)
         pyplot.show()

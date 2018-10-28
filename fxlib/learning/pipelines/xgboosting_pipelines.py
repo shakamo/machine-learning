@@ -76,14 +76,10 @@ def TUNE_XG_BOOSTING():
                              'scale_pos_weight': [1],
                              'objective': ['reg:linear'],
                              'nthread': [4]
-                         }
-                         , scoring='r2'
-                         , cv=10
-                         )
+    }, scoring='r2', cv=10
+    )
 
     return Pipeline([('scl', StandardScaler()), ('est', model)])
-
-
 
 
 kernel2domains = {
@@ -98,15 +94,15 @@ kernel2domains = {
         {'name': 'learning_rate', 'type': 'continuous', 'domain': (0.001, 0.3)}
     ],
     'middle': [
-        {'name': 'learning_rate', 'type': 'continuous', 'domain': (0.00005, 0.1)},
+        {'name': 'learning_rate', 'type': 'continuous',
+            'domain': (0.00005, 0.1)},
         {'name': 'gamma', 'type': 'continuous', 'domain': (0.00005, 0.0015)}
     ],
     'low': [
-        {'name': 'learning_rate', 'type': 'continuous', 'domain': (0.00005, 0.1)},
+        {'name': 'learning_rate', 'type': 'continuous',
+            'domain': (0.00005, 0.1)},
     ]
 }
-
-
 
 
 def Bayesian_XG_BOOSTING(params, name):
@@ -118,7 +114,8 @@ def Bayesian_XG_BOOSTING(params, name):
 
 
 def _refine_param(param, kernel):
-    assert kernel in ['rbf', 'linear', 'xgboosting', 'xgboosting2', 'xgboosting3']
+    assert kernel in ['rbf', 'linear',
+                      'xgboosting', 'xgboosting2', 'xgboosting3']
     if kernel == 'rbf':
         return {'kernel': kernel, 'learning_rate': param[0], 'eta': param[1]}
     elif kernel == 'xgboosting':
